@@ -6,29 +6,21 @@ on:
   # Allows you to run this workflow as a reusable workflow from another workflow
   workflow_call:
     inputs:
-      username:
-        required: true
-        type: string
       workflows-ref:
         description: "ref of the centralized workflows repo that was specified in 'jobs.<name>.uses'"
         required: true
         type: string
-    secrets:
-      token:
-        required: true
 
 jobs:
   example_job:
-    runs-on: ubuntu-latest
-    uses: actions/checkout@v2
-    with:
-      ref: ${{ inputs.workflows-ref }}
-      path: workflows
-      repository: Wepstern/reusable-called/.github/workflows/reusable-workflow-caller.yaml@main
-      token: ${{ secrets.GH_ACCESSTOKEN }}
     steps:
-      - name: checkout repo content
-        uses: actions/checkout@v2 # checkout the repository content to github runner.
+      - name: Checkout workflows repo # required so we can reference the actions locally
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ inputs.workflows-ref }}
+          path: workflows
+          repository: <org>/<central-workflow-repo>
+          token: ${{ secrets.GH_ACCESSTOKEN }}
       - name: setup python
         uses: actions/setup-python@v2
         with:
@@ -36,3 +28,21 @@ jobs:
       - name: execute py script # run the run.py to get the latest data
         run: |
           python app/run.py
+
+    # runs-on: ubuntu-latest
+    # uses: actions/checkout@v2
+    # with:
+    #   ref: ${{ inputs.workflows-ref }}
+    #   path: workflows
+    #   repository: Wepstern/reusable-called/.github/workflows/reusable-workflow-caller.yaml@main
+    #   token: ${{ secrets.GH_ACCESSTOKEN }}
+    # steps:
+    #   - name: checkout repo content
+    #     uses: actions/checkout@v2 # checkout the repository content to github runner.
+    #   - name: setup python
+    #     uses: actions/setup-python@v2
+    #     with:
+    #       python-version: 3.8 #install the python needed
+    #   - name: execute py script # run the run.py to get the latest data
+    #     run: |
+    #       python app/run.py
