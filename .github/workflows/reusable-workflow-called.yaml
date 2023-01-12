@@ -13,6 +13,7 @@ on:
 
 jobs:
   example_job:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout workflows repo # required so we can reference the actions locally
         uses: actions/checkout@v2
