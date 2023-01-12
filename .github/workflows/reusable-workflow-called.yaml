@@ -21,11 +21,11 @@ jobs:
   example_job:
     runs-on: ubuntu-latest
     uses: actions/checkout@v2
-      with:
-        ref: ${{ inputs.workflows-ref }}
-        path: workflows
-        repository: Wepstern/reusable-called/.github/workflows/reusable-workflow-caller.yaml@main
-        token: ${{ secrets.GH_ACCESSTOKEN }}
+    with:
+      ref: ${{ inputs.workflows-ref }}
+      path: workflows
+      repository: Wepstern/reusable-called/.github/workflows/reusable-workflow-caller.yaml@main
+      token: ${{ secrets.GH_ACCESSTOKEN }}
     steps:
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content to github runner.
