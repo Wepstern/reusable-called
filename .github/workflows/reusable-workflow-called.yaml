@@ -10,6 +10,7 @@ on:
         description: "ref of the centralized workflows repo that was specified in 'jobs.<name>.uses'"
         required: true
         type: string
+    secrets:
       GH_ACCESSTOKEN:
         required: true
 
