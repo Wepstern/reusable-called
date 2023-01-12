@@ -23,7 +23,7 @@ jobs:
         with:
           ref: ${{ inputs.workflows-ref }}
           path: workflows
-          repository: Wepstern/reusable-called/.github/workflows/reusable-workflow-caller.yaml
+          repository: Wepstern/reusable-called
           token: ${{ secrets.GH_ACCESSTOKEN }}
       - name: setup python
         uses: actions/setup-python@v2
