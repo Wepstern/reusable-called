@@ -9,19 +9,23 @@ on:
       username:
         required: true
         type: string
+      workflows-ref:
+        description: "ref of the centralized workflows repo that was specified in 'jobs.<name>.uses'"
+        required: true
+        type: string
     secrets:
       token:
         required: true
 
 jobs:
-  example_job_one:
+  example_job:
     runs-on: ubuntu-latest
-    steps:
-      - name: Run a hello world script
-        run: echo Hello, ${{ inputs.username }}
-
-  example_job_two:
-    runs-on: ubuntu-latest
+    uses: actions/checkout@v2
+      with:
+        ref: ${{ inputs.workflows-ref }}
+        path: workflows
+        repository: Wepstern/reusable-called/.github/workflows/reusable-workflow-caller.yaml@main
+        token: ${{ secrets.GH_ACCESSTOKEN }}
     steps:
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content to github runner.
@@ -31,4 +35,4 @@ jobs:
           python-version: 3.8 #install the python needed
       - name: execute py script # run the run.py to get the latest data
         run: |
-          python Wepstern/reusable-called/app/run.py
+          python app/run.py
