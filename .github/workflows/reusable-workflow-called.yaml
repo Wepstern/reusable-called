@@ -24,7 +24,7 @@ jobs:
           ref: ${{ inputs.workflows-ref }}
           path: workflows
           repository: Wepstern/reusable-called
-          token: ${{ secrets.GH_ACCESSTOKEN }}
+          # token: ${{ secrets.GH_ACCESSTOKEN }}
       - name: setup python
         uses: actions/setup-python@v2
         with:
