@@ -20,15 +20,15 @@ jobs:
     steps:
       - name: Checkout workflows repo # required so we can reference the actions locally
         uses: actions/checkout@v2
-        with:
-          ref: ${{ inputs.workflows-ref }}
-          path: bdd-tests
-          repository: Wepstern/reusable-called
-          # token: ${{ secrets.GH_ACCESSTOKEN }}
+        # with:
+        #   ref: ${{ inputs.workflows-ref }}
+        #   path: bdd-tests
+        #   repository: Wepstern/reusable-called
+        # token: ${{ secrets.GH_ACCESSTOKEN }}
       - name: setup python
         uses: actions/setup-python@v2
         with:
           python-version: 3.8 #install the python needed
       - name: execute py script # run the run.py to get the latest data
         run: |
-          python bdd-tests/app/run.py
+          python app/run.py
