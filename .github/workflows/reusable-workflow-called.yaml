@@ -32,3 +32,8 @@ jobs:
       - name: execute py script # run the run.py to get the latest data
         run: |
           python bdd-tests/app/run.py
+      - name: Wait
+        uses: 1itachi/sleep-random@v1.0.0
+        with:
+          minutes: '5'
+          random: 'true'
